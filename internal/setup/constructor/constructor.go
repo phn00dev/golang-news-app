@@ -9,6 +9,6 @@ import (
 
 func Build(dependencies *app.Dependencies) {
 	adminConstructor.InitAdminRequirementCreator(dependencies.DB)
-	categoryConstructor.InitCategoryRequirementCreator(dependencies.DB, dependencies.Config)
+	categoryConstructor.InitCategoryRequirementCreator(dependencies.DB)
 	postConstructor.InitPostRequirementCreator(dependencies.DB, dependencies.Config)
 }

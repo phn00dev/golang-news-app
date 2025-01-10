@@ -1,6 +1,8 @@
 package repository
 
 import (
+	"errors"
+
 	"github.com/phn00dev/golang-news-app/internal/models"
 	"gorm.io/gorm"
 )
@@ -41,4 +43,14 @@ func (categoryRepo categoryRepositoryImp) Update(categoryID int, category models
 
 func (categoryRepo categoryRepositoryImp) Delete(categoryID int) error {
 	return categoryRepo.db.Delete(&models.Category{}, categoryID).Error
+}
+
+func (categoryRepo categoryRepositoryImp) VerifyCategoryName(categoryName string) bool {
+	if err := categoryRepo.db.Where("category_name =?", categoryName).First(&models.Category{}).Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return true
+		}
+		return false
+	}
+	return false
 }
