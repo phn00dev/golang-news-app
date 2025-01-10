@@ -2,12 +2,21 @@ package routes
 
 import (
 	"github.com/gofiber/fiber/v2"
+	adminConstructor "github.com/phn00dev/golang-news-app/internal/domain/admin/constructor"
 	categoryConstructor "github.com/phn00dev/golang-news-app/internal/domain/category/constructor"
-	"github.com/phn00dev/golang-news-app/internal/domain/post/constructor"
+	postConstructor "github.com/phn00dev/golang-news-app/internal/domain/post/constructor"
 )
 
 func AdminRoutes(app *fiber.App) {
 	adminApiV1 := app.Group("v1/api/admin")
+
+	// admin routes
+	adminRoute := adminApiV1.Group("/admins")
+	adminRoute.Get("/", adminConstructor.AdminHandler.GetAll)
+	adminRoute.Get("/:adminID", adminConstructor.AdminHandler.GetOne)
+	adminRoute.Post("/", adminConstructor.AdminHandler.Create)
+	adminRoute.Put("/:adminID", adminConstructor.AdminHandler.Update)
+	adminRoute.Delete("/:adminID", adminConstructor.AdminHandler.Delete)
 
 	// category routes
 	categoryRoute := adminApiV1.Group("/categories")
@@ -19,10 +28,10 @@ func AdminRoutes(app *fiber.App) {
 
 	// post routes
 	postRoute := adminApiV1.Group("/posts")
-	postRoute.Get("/", constructor.PostHandler.GetAll)
-	postRoute.Get("/:postID", constructor.PostHandler.GetOne)
-	postRoute.Post("/", constructor.PostHandler.Create)
-	postRoute.Put("/:postID", constructor.PostHandler.Update)
-	postRoute.Delete("/:postID", constructor.PostHandler.Delete)
+	postRoute.Get("/", postConstructor.PostHandler.GetAll)
+	postRoute.Get("/:postID", postConstructor.PostHandler.GetOne)
+	postRoute.Post("/", postConstructor.PostHandler.Create)
+	postRoute.Put("/:postID", postConstructor.PostHandler.Update)
+	postRoute.Delete("/:postID", postConstructor.PostHandler.Delete)
 
 }
