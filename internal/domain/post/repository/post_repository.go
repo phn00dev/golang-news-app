@@ -7,5 +7,5 @@ type PostRepository interface {
 	GetOneByID(postID int) (*models.Post, error)
 	Create(post models.Post) error
 	Update(postID int, post models.Post) error
-	Delete(postd int) error
+	Delete(postID int) error
 }

@@ -16,21 +16,29 @@ func NewPostRepository(db *gorm.DB) PostRepository {
 }
 
 func (postRepo postRepositoryImp) GetAll() ([]models.Post, error) {
-	panic("post repo imp")
+	var posts []models.Post
+	if err := postRepo.db.Find(&posts).Error; err != nil {
+		return nil, err
+	}
+	return posts, nil
 }
 
 func (postRepo postRepositoryImp) GetOneByID(postID int) (*models.Post, error) {
-	panic("post repo imp")
+	var post models.Post
+	if err := postRepo.db.First(&post, postID).Error; err != nil {
+		return nil, err
+	}
+	return &post, nil
 }
 
 func (postRepo postRepositoryImp) Create(post models.Post) error {
-	panic("post repo imp")
+	return postRepo.db.Create(&post).Error
 }
 
 func (postRepo postRepositoryImp) Update(postID int, post models.Post) error {
-	panic("post repo imp")
+	return postRepo.db.Model(models.Post{}).Where("id=?", postID).Updates(post).Error
 }
 
-func (postRepo postRepositoryImp) Delete(postd int) error {
-	panic("post repo imp")
+func (postRepo postRepositoryImp) Delete(postID int) error {
+	return postRepo.db.Delete(&models.Post{}, postID).Error
 }

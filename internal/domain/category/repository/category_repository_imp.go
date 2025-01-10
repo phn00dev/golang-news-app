@@ -16,21 +16,29 @@ func NewCategoryRepository(db *gorm.DB) CategoryRepository {
 }
 
 func (categoryRepo categoryRepositoryImp) GetAll() ([]models.Category, error) {
-	panic("category repo imp")
+	var categories []models.Category
+	if err := categoryRepo.db.Find(&categories).Error; err != nil {
+		return nil, err
+	}
+	return categories, nil
 }
 
 func (categoryRepo categoryRepositoryImp) GetOne(categoryID int) (*models.Category, error) {
-	panic("category repo imp")
+	var category models.Category
+	if err := categoryRepo.db.First(&category, categoryID).Error; err != nil {
+		return nil, err
+	}
+	return &category, nil
 }
 
 func (categoryRepo categoryRepositoryImp) Create(category models.Category) error {
-	panic("category repo imp")
+	return categoryRepo.db.Create(&category).Error
 }
 
 func (categoryRepo categoryRepositoryImp) Update(categoryID int, category models.Category) error {
-	panic("category repo imp")
+	return categoryRepo.db.Model(&models.Category{}).Where("id=?", categoryID).Error
 }
 
 func (categoryRepo categoryRepositoryImp) Delete(categoryID int) error {
-	panic("category repo imp")
+	return categoryRepo.db.Delete(&models.Category{}, categoryID).Error
 }
