@@ -19,7 +19,8 @@ func NewDbConfig(config *config.Config) *DatabaseConfig {
 }
 
 func (dbConfig *DatabaseConfig) GetConfig() (*gorm.DB, error) {
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=%s",
+	dsn := fmt.Sprintf(
+		"host=%s user=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=%s",
 		dbConfig.config.DatabaseConfig.Host,
 		dbConfig.config.DatabaseConfig.User,
 		dbConfig.config.DatabaseConfig.Password,

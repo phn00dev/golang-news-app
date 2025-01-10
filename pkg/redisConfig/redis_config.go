@@ -10,8 +10,9 @@ import (
 
 type RedisConfig struct {
 	config *config.Config
-	client *redis.Client
 }
+
+var RedisClient *redis.Client
 
 func NewRedisConfig(config *config.Config) *RedisConfig {
 	return &RedisConfig{
@@ -37,10 +38,10 @@ func (redisConfig *RedisConfig) Connect() error {
 	}
 
 	fmt.Println("Connected to Redis successfully!")
-	redisConfig.client = client
+	RedisClient = client
 	return nil
 }
 
 func (redisConfig *RedisConfig) GetClient() *redis.Client {
-	return redisConfig.client
+	return RedisClient
 }
