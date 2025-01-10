@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/phn00dev/golang-news-app/internal/setup/routes"
 )
 
 func NewApp(dependencies *Dependencies) (httpServer *fiber.App) {
@@ -26,6 +27,9 @@ func NewApp(dependencies *Dependencies) (httpServer *fiber.App) {
 	})
 
 	// get routes
+	routes.AdminRoutes(httpServer)
+	routes.UserRoutes(httpServer)
+	routes.StaticRoutes(httpServer)
 
 	return httpServer
 }
