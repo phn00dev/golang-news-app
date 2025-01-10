@@ -7,6 +7,7 @@ type Admin struct {
 	Username    string    `json:"username"`
 	FullName    string    `json:"full_name"`
 	PhoneNumber string    `json:"phone_number"`
+	AdminRole   string    `json:"admin_role"`
 	AdminStatus string    `json:"admin_status"`
 	Password    string    `json:"password"`
 	LastLogin   time.Time `json:"last_login"`
