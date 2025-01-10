@@ -1,10 +1,9 @@
 package dto
 
 import (
-	"time"
-
 	"github.com/phn00dev/golang-news-app/internal/constants"
 	"github.com/phn00dev/golang-news-app/internal/models"
+	timeformat "github.com/phn00dev/golang-news-app/internal/utils/timeFormat"
 )
 
 type AdminResponse struct {
@@ -17,13 +16,6 @@ type AdminResponse struct {
 	LastLogin   string                 `json:"last_login"`
 	CreatedAt   string                 `json:"created_at"`
 	UpdatedAt   string                 `json:"updated_at"`
-}
-
-func formatTime(t time.Time) string {
-	if t.IsZero() {
-		return ""
-	}
-	return t.Format("02-01-2006 15:04:05")
 }
 
 func GetAllAdminResponses(admins []models.Admin) []AdminResponse {
@@ -46,9 +38,9 @@ func GetOneAdminResponse(admin *models.Admin) AdminResponse {
 		PhoneNumber: admin.PhoneNumber,
 		AdminRole:   admin.AdminRole,
 		AdminStatus: admin.AdminStatus,
-		LastLogin:   formatTime(admin.LastLogin),
-		CreatedAt:   formatTime(admin.CreatedAt),
-		UpdatedAt:   formatTime(admin.UpdatedAt),
+		LastLogin:   timeformat.FormatTime(admin.LastLogin),
+		CreatedAt:   timeformat.FormatTime(admin.CreatedAt),
+		UpdatedAt:   timeformat.FormatTime(admin.UpdatedAt),
 	}
 }
 
