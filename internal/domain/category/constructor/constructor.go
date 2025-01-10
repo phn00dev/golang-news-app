@@ -16,5 +16,5 @@ var (
 func InitCategoryRequirementCreator(db *gorm.DB) {
 	categoryRepo = repository.NewCategoryRepository(db)
 	categoryService = service.NewCategoryService(categoryRepo)
-	CategoryHandler = handler.NewCategoryService(categoryService)
+	CategoryHandler = handler.NewCategoryHandler(categoryService)
 }
